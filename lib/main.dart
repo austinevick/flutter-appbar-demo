@@ -130,7 +130,9 @@ class _MyHomePageState extends State<MyHomePage> {
           child: students.isEmpty
               ? Container(
                   color: Colors.purple,
-                  child: Center(child: Text('Names of states\nappear here')),
+                  child: Center(
+                      child: Text('Names of states\nappear here',
+                          style: TextStyle(color: Colors.white, fontSize: 25))),
                 )
               : Center(
                   child: ListView(
