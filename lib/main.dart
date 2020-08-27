@@ -121,79 +121,94 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: isSelected ? selectedAppbar() : defaultAppBar(),
-      body: Center(
-        child: ListView(
-          controller: scrollController,
-          children: List.generate(
-            students.length,
-            (index) => Center(
-                child: Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Card(
-                  color:
-                      students[index].isSelected ? Colors.green : Colors.white,
-                  child: ListTile(
-                      subtitle: Text(
-                        students[index].location,
-                        style: TextStyle(
-                          color: students[index].isSelected
-                              ? Colors.white
-                              : Colors.black,
-                          fontSize: 15,
-                        ),
-                      ),
-                      trailing: students[index].isSelected
-                          ? IconButton(
-                              icon: Icon(
-                                Icons.clear,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {
-                                setState(() => students.removeAt(index));
-                                if (students.isEmpty) {
-                                  setState(() => isSelected = false);
-                                }
-                              },
-                            )
-                          : null,
-                      onTap: () {
-                        setState(() {
-                          if (selecteditem() > 0) {
-                            students[index].isSelected =
-                                !students[index].isSelected;
-                          }
-                        });
-                        if (selecteditem() < 1) {
-                          setState(() {
-                            isSelected = false;
-                          });
-                        }
-                      },
-                      onLongPress: () {
-                        setState(() {
-                          students[index].isSelected = true;
-                          isSelected = true;
-                        });
-                      },
-                      leading: students[index].isSelected
-                          ? CircleAvatar(
-                              child: Icon(Icons.check),
-                            )
-                          : CircleAvatar(
-                              child: Text(students[index].name.substring(0, 1)),
-                            ),
-                      title: Text(
-                        students[index].name,
-                        style: TextStyle(
-                            fontSize: 20,
+      body: AnimatedSwitcher(
+          transitionBuilder: (widget, animation) => ScaleTransition(
+                scale: animation,
+                child: widget,
+              ),
+          duration: Duration(seconds: 1),
+          child: students.isEmpty
+              ? Container(
+                  color: Colors.purple,
+                  child: Center(child: Text('Names of states\nappear here')),
+                )
+              : Center(
+                  child: ListView(
+                    controller: scrollController,
+                    children: List.generate(
+                      students.length,
+                      (index) => Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Card(
                             color: students[index].isSelected
-                                ? Colors.white
-                                : Colors.black),
-                      ))),
-            )),
-          ),
-        ),
-      ),
+                                ? Colors.green
+                                : Colors.white,
+                            child: ListTile(
+                                subtitle: Text(
+                                  students[index].location,
+                                  style: TextStyle(
+                                    color: students[index].isSelected
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                trailing: students[index].isSelected
+                                    ? IconButton(
+                                        icon: Icon(
+                                          Icons.clear,
+                                          color: Colors.white,
+                                        ),
+                                        onPressed: () {
+                                          setState(
+                                              () => students.removeAt(index));
+                                          if (students.isEmpty) {
+                                            setState(() => isSelected = false);
+                                          }
+                                        },
+                                      )
+                                    : null,
+                                onTap: () {
+                                  setState(() {
+                                    if (selecteditem() > 0) {
+                                      students[index].isSelected =
+                                          !students[index].isSelected;
+                                    }
+                                  });
+                                  if (selecteditem() < 1) {
+                                    setState(() {
+                                      isSelected = false;
+                                    });
+                                  }
+                                },
+                                onLongPress: () {
+                                  setState(() {
+                                    students[index].isSelected = true;
+                                    isSelected = true;
+                                  });
+                                },
+                                leading: students[index].isSelected
+                                    ? CircleAvatar(
+                                        child: Icon(Icons.check),
+                                      )
+                                    : CircleAvatar(
+                                        child: Text(students[index]
+                                            .name
+                                            .substring(0, 1)),
+                                      ),
+                                title: Text(
+                                  students[index].name,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: students[index].isSelected
+                                          ? Colors.white
+                                          : Colors.black),
+                                ))),
+                      )),
+                    ),
+                  ),
+                )),
       floatingActionButton: AnimatedSwitcher(
         duration: Duration(seconds: 1),
         child: isScrolled
