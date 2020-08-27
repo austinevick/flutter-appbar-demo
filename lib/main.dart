@@ -48,15 +48,6 @@ class _MyHomePageState extends State<MyHomePage> {
     Students(name: 'Lagos', location: 'Ikeja'),
     Students(name: 'FCT', location: 'Abuja'),
     Students(name: 'Kaduna', location: 'Kaduna'),
-    Students(name: 'Akwa Ibom', location: 'Uyo'),
-    Students(name: 'Enugu', location: 'Enugu'),
-    Students(name: 'Oyo', location: 'Ibadan'),
-    Students(name: 'Lagos', location: 'Ikeja'),
-    Students(name: 'FCT', location: 'Abuja'),
-    Students(name: 'Kaduna', location: 'Kaduna'),
-    Students(name: 'Akwa Ibom', location: 'Uyo'),
-    Students(name: 'Enugu', location: 'Enugu'),
-    Students(name: 'Oyo', location: 'Ibadan'),
   ];
   var isSelected = false;
   defaultAppBar() => AppBar(
@@ -137,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
             students.length,
             (index) => Center(
                 child: Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(2.0),
               child: Card(
                   color:
                       students[index].isSelected ? Colors.green : Colors.white,
